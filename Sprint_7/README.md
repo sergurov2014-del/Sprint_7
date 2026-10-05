@@ -16,7 +16,7 @@ allure_report - отчёт о прохождении тестов allure, отк
 
 * helpers.py - в файле описан класс Helper с вспомогательными методами для генерации тестовых данных с помощью модулей string и random<br>
 <br>
-* main.py - в файле представлены методы запросов к ручкам https://qa-scooter.education-services.ru/
+* api_methods.py - в файле представлены методы запросов к ручкам https://qa-scooter.education-services.ru/
 <br>
 *  data.py - в файл вынесены данные о номерах станций метро для создания рандомного заказа<br>
 <br>
