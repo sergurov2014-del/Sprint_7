@@ -1,4 +1,4 @@
-import main as M
+import api_methods as M
 import allure
 import helpers
 from urls import BASE_URL
@@ -15,7 +15,7 @@ class TestGetOrder:
         track_number = response.json()["track"]
         send_order_text = response.json()
 
-        get_order_response = M.return_get_response_for_get_order_with_track_number(
+        get_order_response = M.get_response_for_get_order_with_track_number(
             track_number
         )
         data = get_order_response.json()
@@ -36,7 +36,7 @@ class TestGetOrder:
     def test_get_order_without_order_numder_returns_404(
         self,
     ):
-        get_order_response = M.return_get_response_for_get_order_with_track_number("")
+        get_order_response = M.get_response_for_get_order_with_track_number("")
         assert get_order_response.status_code == 400
         assert (
             get_order_response.text
@@ -47,7 +47,7 @@ class TestGetOrder:
     def test_get_created_order_without_order_numder_returns_404(
         self,
     ):
-        get_order_response = M.return_get_response_for_get_order_with_track_number(
+        get_order_response = M.get_response_for_get_order_with_track_number(
             9999999
         )
 

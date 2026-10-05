@@ -2,7 +2,7 @@ import requests
 from urls import BASE_URL
 
 
-def return_post_response_for_create(
+def post_response_for_create(
     payload,
 ):  # метод для создания запроса на регистрацию курьера
     response = requests.post(
@@ -13,7 +13,7 @@ def return_post_response_for_create(
     return response
 
 
-def return_post_response_for_login(
+def post_response_for_login(
     payload,
 ):  # метод для создания запроса на логин курьер
     response = requests.post(
@@ -24,7 +24,7 @@ def return_post_response_for_login(
     return response
 
 
-def return_post_response_for_make_order(payload):
+def post_response_for_make_order(payload):
     response = requests.post(
         f"{BASE_URL}/orders",
         json=payload,
@@ -33,21 +33,21 @@ def return_post_response_for_make_order(payload):
     return response
 
 
-def return_get_response_for_get_order():
+def get_response_for_get_order():
     response = requests.get(
         f"{BASE_URL}/orders",
     )
     return response
 
 
-def return_get_response_for_get_order_with_track_number(track_number):
+def get_response_for_get_order_with_track_number(track_number):
     response = requests.get(
         f"{BASE_URL}/orders/track?t={track_number}",
     )
     return response
 
 
-def return_put_response_for_accept_order(track_number, courier_id):
+def put_response_for_accept_order(track_number, courier_id):
     url = f"{BASE_URL}/orders/accept/{track_number}"
 
     # Передаем параметры отдельным словарем!

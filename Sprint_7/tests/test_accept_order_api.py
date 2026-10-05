@@ -1,6 +1,6 @@
 import allure
 import helpers
-import main as M
+import api_methods as M
 
 
 class TestAcceptOrderAPI:
@@ -13,7 +13,7 @@ class TestAcceptOrderAPI:
     ):
         courierId = create_delete_courier[2]  # из фикстуры получаем clientID
         order_id = helpers.return_order_id()
-        response_accept_order = M.return_put_response_for_accept_order(
+        response_accept_order = M.put_response_for_accept_order(
             order_id, courierId
         )  # принимаем заказ передвая туда id заказа и id созданного курьера
         assert response_accept_order.status_code == 200
@@ -25,7 +25,7 @@ class TestAcceptOrderAPI:
     def test_accept_created_order_incorrect_order_id(self, create_delete_courier):
         courierId = create_delete_courier[2]  # из фикстуры получаем clientID
         order_id = -666
-        response_accept_order = M.return_put_response_for_accept_order(
+        response_accept_order = M.put_response_for_accept_order(
             order_id, courierId
         )  # принимаем заказ передвая туда id заказа и id созданного курьера
         assert response_accept_order.status_code == 404
@@ -40,7 +40,7 @@ class TestAcceptOrderAPI:
     def test_accept_created_order_incorrect_courierid(self):
         courierId = -666
         order_id = helpers.return_order_id()
-        response_accept_order = M.return_put_response_for_accept_order(
+        response_accept_order = M.put_response_for_accept_order(
             order_id, courierId
         )  # принимаем заказ передвая туда id заказа и id созданного курьера
         assert response_accept_order.status_code == 404
@@ -55,7 +55,7 @@ class TestAcceptOrderAPI:
     def test_accept_created_order_without_order_id(self, create_delete_courier):
         courierId = create_delete_courier[2]
         order_id = None
-        response_accept_order = M.return_put_response_for_accept_order(
+        response_accept_order = M.put_response_for_accept_order(
             order_id, courierId
         )
         assert response_accept_order.status_code == 400
@@ -70,7 +70,7 @@ class TestAcceptOrderAPI:
     def test_accept_created_order_without_courierid(self, create_delete_courier):
         courierId = None
         order_id = helpers.return_order_id()
-        response_accept_order = M.return_put_response_for_accept_order(
+        response_accept_order = M.put_response_for_accept_order(
             order_id, courierId
         )  # принимаем заказ передвая туда id заказа и id созданного курьера
         assert response_accept_order.status_code == 400

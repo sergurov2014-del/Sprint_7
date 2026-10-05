@@ -1,7 +1,7 @@
 import allure
 import helpers
 import pytest
-import main as M
+import api_methods as M
 
 
 class TestCreateCourierApi:
@@ -32,7 +32,7 @@ class TestCreateCourierApi:
     ):  # В данных тестах фиктура не используется так как пользователь не создаётся и его не надо удалять
         allure.dynamic.title(allure_title)
         # меняем заголовок allure после каждой итерации
-        response = M.return_post_response_for_create(payload)
+        response = M.post_response_for_create(payload)
 
         assert response.status_code == 400
 
@@ -46,5 +46,5 @@ class TestCreateCourierApi:
         payload, first_response, _ = create_delete_courier
         # ещё раз отправляем запрос на создание пользователя с уже существующими лог\пасс
 
-        second_response = M.return_post_response_for_create(payload)
+        second_response = M.post_response_for_create(payload)
         assert second_response.status_code == 409

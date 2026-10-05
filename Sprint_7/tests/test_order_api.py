@@ -2,7 +2,7 @@ import allure
 import pytest
 import helpers
 import data as D
-import main as M
+import api_methods as M
 
 
 class TestOrderApi:
@@ -28,7 +28,7 @@ class TestOrderApi:
         allure.dynamic.title(allure_title)
         payloads = helpers.return_some_order()
         payloads["color"] = scooter_color
-        response = M.return_post_response_for_make_order(payloads)
+        response = M.post_response_for_make_order(payloads)
 
         assert response.status_code == 201
         assert "track" in response.text
@@ -36,7 +36,7 @@ class TestOrderApi:
     @allure.title("Проверка получения списка заказов: структура и наличие данных")
     def test_get_orders_list_returns_valid_structure(self):
 
-        response = M.return_get_response_for_get_order()
+        response = M.get_response_for_get_order()
         assert response.status_code == 200  # Проверяем статус 200
         data = response.json()  # Парсим JSON
         assert "orders" in data, "В ответе отсутствует ключ 'orders'"

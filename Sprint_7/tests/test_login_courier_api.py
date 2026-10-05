@@ -1,7 +1,7 @@
 import helpers
 import pytest
 import allure
-import main as M
+import api_methods as M
 
 
 class TestLoginCourierApi:
@@ -9,7 +9,7 @@ class TestLoginCourierApi:
     @allure.title('Проверка логина созданного курьера. Возвращение 201')
     def test_courier_login_success_returns_id(self, create_delete_courier):
         payload = create_delete_courier[0]
-        response_login = M.return_post_response_for_login(payload)
+        response_login = M.post_response_for_login(payload)
 
         assert response_login.status_code == 200
         assert response_login.json()["id"] is not None
@@ -31,7 +31,7 @@ class TestLoginCourierApi:
         # удаляем логин или пароль в зависимости от параметра теста
         del bad_payload[field]
         # Отправляем запрос с битыми данными
-        response_login = M.return_post_response_for_login(bad_payload)
+        response_login = M.post_response_for_login(bad_payload)
 
         assert response_login.status_code == 400
 
@@ -53,6 +53,6 @@ class TestLoginCourierApi:
         # заменяем логин или пароль в зависимости от параметра теста
         bad_payload[field] = helpers.generate_random_string(9)
         # Отправляем запрос с битыми данными
-        response_login = M.return_post_response_for_login(bad_payload)
+        response_login = M.post_response_for_login(bad_payload)
 
         assert response_login.status_code == 404
